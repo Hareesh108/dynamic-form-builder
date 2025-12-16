@@ -1,12 +1,7 @@
-
 import Router from "./routes/sections";
 
 function App() {
-  return (
-    <>
-      <Router />
-    </>
-  );
+  return <Router />;
 }
 
 export default App;
