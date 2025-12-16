@@ -1,7 +1,6 @@
-import { Controller, useFormContext } from 'react-hook-form';
-
-import { type Theme, type SxProps } from '@mui/material/styles';
-import TextField, { type TextFieldProps } from '@mui/material/TextField';
+import { type Theme, type SxProps } from "@mui/material/styles";
+import TextField, { type TextFieldProps } from "@mui/material/TextField";
+import { Controller, useFormContext } from "react-hook-form";
 
 // ----------------------------------------------------------------------
 
@@ -39,13 +38,13 @@ export default function DFBSelect({
               PaperProps: {
                 sx: {
                   ...(!native && {
-                    maxHeight: typeof maxHeight === 'number' ? maxHeight : 'unset',
+                    maxHeight: typeof maxHeight === "number" ? maxHeight : "unset",
                   }),
                   ...PaperPropsSx,
                 },
               },
             },
-            sx: { textTransform: 'capitalize' },
+            sx: { textTransform: "capitalize" },
           }}
           error={!!error}
           helperText={error ? error?.message : helperText}
@@ -57,4 +56,3 @@ export default function DFBSelect({
     />
   );
 }
-

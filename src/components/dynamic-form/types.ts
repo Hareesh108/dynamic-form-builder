@@ -1,4 +1,4 @@
-export type FieldType = 'text' | 'number' | 'select' | 'checkbox' | 'date';
+export type FieldType = "text" | "number" | "select" | "checkbox" | "date";
 
 export type Option = {
   label: string;
@@ -11,7 +11,7 @@ export type ValidationRules = {
   max?: number;
   minLength?: number;
   maxLength?: number;
-  pattern?: string; 
+  pattern?: string;
 };
 
 export type ConditionalRule = {

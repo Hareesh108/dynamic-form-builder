@@ -1,6 +1,6 @@
+import { Box, Container, Typography, Button } from "@mui/material";
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
-import { Box, Container, Typography, Button } from "@mui/material";
 import { paths } from "src/routes/paths";
 
 export default function Page() {
@@ -27,17 +27,12 @@ export default function Page() {
         </Typography>
 
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          Build and deploy custom forms visually — schema-driven, validated, and
-          conditionally reactive. No code required.
+          Build and deploy custom forms visually — schema-driven, validated, and conditionally reactive. No code
+          required.
         </Typography>
 
         <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={goToDashboard}
-            sx={{ px: 3, py: 1.25 }}
-          >
+          <Button variant="contained" size="large" onClick={goToDashboard} sx={{ px: 3, py: 1.25 }}>
             Open Form Builder
           </Button>
         </Box>

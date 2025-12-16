@@ -1,14 +1,15 @@
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+
+import App from "./App.tsx";
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
-    primary: { main: '#6366f1' },
+    mode: "light",
+    primary: { main: "#6366f1" },
   },
   components: {
     MuiButton: {
@@ -29,5 +30,5 @@ createRoot(document.getElementById("root")!).render(
         </Suspense>
       </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );

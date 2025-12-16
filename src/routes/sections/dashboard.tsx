@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Outlet } from "react-router";
 
-const Home = lazy(() => import("src/pages/dashboard"));
+const Home = lazy(() => import("src/pages/dashboard/home"));
 
 const dashboard = {
   path: "dashboard",

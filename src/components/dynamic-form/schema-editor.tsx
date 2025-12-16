@@ -1,17 +1,11 @@
-import  { useCallback, useMemo, useState } from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
-import type { FormSchema } from "./types";
-import DynamicForm from "./dynamic-form";
+import { Box, Button, Divider, Paper, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { defaultSchema, isJsonValid } from './helpers';
+import { useCallback, useMemo, useState } from "react";
 
+import type { FormSchema } from "./types";
+
+import DynamicForm from "./dynamic-form";
+import { defaultSchema, isJsonValid } from "./helpers";
 
 export default function SchemaEditor() {
   const [text, setText] = useState(() => JSON.stringify(defaultSchema, null, 2));
@@ -29,13 +23,13 @@ export default function SchemaEditor() {
         validation: { required: true, minLength: 2 },
       },
     }),
-    []
+    [],
   );
 
   const apply = useCallback(() => {
     const check = isJsonValid(text);
     if (!check.ok) {
-      setErrors([check.message ?? 'Please provide valid JSON format']);
+      setErrors([check.message ?? "Please provide valid JSON format"]);
       return;
     }
 
@@ -65,8 +59,7 @@ export default function SchemaEditor() {
         <Paper sx={{ p: 2 }} elevation={2}>
           <Typography variant="h6">Schema Editor</Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Edit the form schema JSON on the left then click Apply to update the
-            preview.
+            Edit the form schema JSON on the left then click Apply to update the preview.
           </Typography>
 
           <TextField

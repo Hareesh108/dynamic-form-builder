@@ -1,0 +1,10 @@
+build/*
+dist/*
+public/*
+**/out/*
+**/node_modules/*
+README.md
+.env
+
+package-lock.json
+bun.lockb

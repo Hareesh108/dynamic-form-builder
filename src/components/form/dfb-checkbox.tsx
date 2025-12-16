@@ -1,14 +1,11 @@
-import { Controller, useFormContext } from 'react-hook-form';
-
-import Checkbox from '@mui/material/Checkbox';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControlLabel, {
-  type FormControlLabelProps,
-} from '@mui/material/FormControlLabel';
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel, { type FormControlLabelProps } from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import { Controller, useFormContext } from "react-hook-form";
 
 // ----------------------------------------------------------------------
 
-interface RHFCheckboxProps extends Omit<FormControlLabelProps, 'control'> {
+interface RHFCheckboxProps extends Omit<FormControlLabelProps, "control"> {
   name: string;
   helperText?: React.ReactNode;
 }
@@ -32,5 +29,3 @@ export default function DFBCheckbox({ name, helperText, ...other }: RHFCheckboxP
     />
   );
 }
-
-

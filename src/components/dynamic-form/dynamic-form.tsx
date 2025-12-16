@@ -1,10 +1,12 @@
-import  { useMemo } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Paper, Typography } from '@mui/material';
-import type { FormSchema } from './types';
-import { buildZodSchema } from './utils';
-import { Field } from '../form/fields';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Button, Paper, Typography } from "@mui/material";
+import { useMemo } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+
+import type { FormSchema } from "./types";
+
+import { Field } from "../form/fields";
+import { buildZodSchema } from "./utils";
 
 type Props = {
   schema: FormSchema;
@@ -29,7 +31,7 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
           </Typography>
         )}
 
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'grid', gap: 2 }}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: "grid", gap: 2 }}>
           {schema.fields.map((field) => {
             if (field.conditional) {
               const other = values[field.conditional.field];
@@ -37,13 +39,19 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
             }
 
             switch (field.type) {
-              case 'text':
-              case 'number':
+              case "text":
+              case "number":
                 return (
-                  <Field.Text key={field.name} name={field.name} label={field.label} type={field.type === 'number' ? 'number' : 'text'} helperText={field.helperText} />
+                  <Field.Text
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    type={field.type === "number" ? "number" : "text"}
+                    helperText={field.helperText}
+                  />
                 );
 
-              case 'select':
+              case "select":
                 return (
                   <Field.Select key={field.name} name={field.name} label={field.label} helperText={field.helperText}>
                     {field.options?.map((o) => (
@@ -54,10 +62,10 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
                   </Field.Select>
                 );
 
-              case 'checkbox':
+              case "checkbox":
                 return <Field.Checkbox key={field.name} name={field.name} label={field.label} />;
 
-              case 'date':
+              case "date":
                 return <Field.Text key={field.name} name={field.name} label={field.label} type="date" />;
 
               default:
@@ -65,8 +73,10 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
             }
           })}
 
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
-            <Button type="submit" variant="contained">Submit</Button>
+          <Box sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
           </Box>
         </Box>
       </Paper>
@@ -76,24 +86,24 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
 
 function getDefaultValues(schema: FormSchema) {
   const obj: Record<string, any> = {};
-  
+
   for (const f of schema.fields) {
     switch (f.type) {
-      case 'text':
-      case 'date':
-        obj[f.name] = '';
+      case "text":
+      case "date":
+        obj[f.name] = "";
         break;
-      case 'number':
+      case "number":
         obj[f.name] = 0;
         break;
-      case 'select':
-        obj[f.name] = f.options && f.options.length ? f.options[0].value : '';
+      case "select":
+        obj[f.name] = f.options && f.options.length ? f.options[0].value : "";
         break;
-      case 'checkbox':
+      case "checkbox":
         obj[f.name] = false;
         break;
       default:
-        obj[f.name] = '';
+        obj[f.name] = "";
     }
   }
   return obj;

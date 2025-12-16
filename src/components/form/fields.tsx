@@ -1,6 +1,6 @@
-import DFBTextField from "./dfb-text-field";
-import DFBSelect from "./dfb-select";
 import DFBCheckbox from "./dfb-checkbox";
+import DFBSelect from "./dfb-select";
+import DFBTextField from "./dfb-text-field";
 
 // ----------------------------------------------------------------------
 
