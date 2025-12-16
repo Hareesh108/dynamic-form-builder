@@ -1,9 +1,6 @@
 export const paths = {
-  auth: {
-    login: "auth/login",
-    signUp: "auth/signup",
-  },
+  landing: "/",
   dashboard: {
-    login: "dashboard/home",
+    home: "dashboard/home",
   },
 };

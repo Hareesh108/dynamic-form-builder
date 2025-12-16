@@ -1,12 +1,13 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
 import { Box, Container, Typography, Button } from "@mui/material";
+import { paths } from "src/routes/paths";
 
 export default function Page() {
   const navigate = useNavigate();
 
   const goToDashboard = useCallback(() => {
-    navigate("/dashboard/home");
+    navigate(paths.dashboard.home);
   }, [navigate]);
 
   return (
