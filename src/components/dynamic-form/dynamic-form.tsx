@@ -4,9 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import type { FormSchema } from './types';
 import { buildZodSchema } from './utils';
-import DFBTextField from 'src/components/form/dfb-text-field';
-import DFBSelect from 'src/components/form/dfb-select';
-import DFBCheckbox from 'src/components/form/dfb-checkbox';
+import { Field } from '../form/fields';
 
 type Props = {
   schema: FormSchema;
@@ -31,9 +29,8 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
           </Typography>
         )}
 
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'grid', gap: 16 }}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'grid', gap: 2 }}>
           {schema.fields.map((field) => {
-            // Conditional rendering
             if (field.conditional) {
               const other = values[field.conditional.field];
               if (other !== field.conditional.value) return null;
@@ -43,25 +40,25 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
               case 'text':
               case 'number':
                 return (
-                  <DFBTextField key={field.name} name={field.name} label={field.label} type={field.type === 'number' ? 'number' : 'text'} helperText={field.helperText} />
+                  <Field.Text key={field.name} name={field.name} label={field.label} type={field.type === 'number' ? 'number' : 'text'} helperText={field.helperText} />
                 );
 
               case 'select':
                 return (
-                  <DFBSelect key={field.name} name={field.name} label={field.label} helperText={field.helperText}>
+                  <Field.Select key={field.name} name={field.name} label={field.label} helperText={field.helperText}>
                     {field.options?.map((o) => (
                       <option key={String(o.value)} value={o.value}>
                         {o.label}
                       </option>
                     ))}
-                  </DFBSelect>
+                  </Field.Select>
                 );
 
               case 'checkbox':
-                return <DFBCheckbox key={field.name} name={field.name} label={field.label} />;
+                return <Field.Checkbox key={field.name} name={field.name} label={field.label} />;
 
               case 'date':
-                return <DFBTextField key={field.name} name={field.name} label={field.label} type="date" />;
+                return <Field.Text key={field.name} name={field.name} label={field.label} type="date" />;
 
               default:
                 return null;

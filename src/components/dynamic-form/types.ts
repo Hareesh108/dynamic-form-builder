@@ -11,7 +11,7 @@ export type ValidationRules = {
   max?: number;
   minLength?: number;
   maxLength?: number;
-  pattern?: string; // RegExp string
+  pattern?: string; 
 };
 
 export type ConditionalRule = {
