@@ -1,16 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Button, MenuItem, Paper, Typography } from "@mui/material";
 import { useMemo } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import type { FormSchema } from "./types";
 
 import { Field } from "../form/fields";
+import { getDefaultValues } from "./helpers";
 import { buildZodSchema } from "./utils";
 
 type Props = {
   schema: FormSchema;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: unknown) => void;
 };
 
 export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
@@ -55,9 +56,9 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
                 return (
                   <Field.Select key={field.name} name={field.name} label={field.label} helperText={field.helperText}>
                     {field.options?.map((o) => (
-                      <option key={String(o.value)} value={o.value}>
+                      <MenuItem key={String(o.value)} value={String(o.value)}>
                         {o.label}
-                      </option>
+                      </MenuItem>
                     ))}
                   </Field.Select>
                 );
@@ -66,7 +67,7 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
                 return <Field.Checkbox key={field.name} name={field.name} label={field.label} />;
 
               case "date":
-                return <Field.Text key={field.name} name={field.name} label={field.label} type="date" />;
+                return <Field.DatePicker key={field.name} name={field.name} label={field.label} type="date" />;
 
               default:
                 return null;
@@ -82,29 +83,4 @@ export default function DynamicForm({ schema, onSubmit }: Readonly<Props>) {
       </Paper>
     </FormProvider>
   );
-}
-
-function getDefaultValues(schema: FormSchema) {
-  const obj: Record<string, any> = {};
-
-  for (const f of schema.fields) {
-    switch (f.type) {
-      case "text":
-      case "date":
-        obj[f.name] = "";
-        break;
-      case "number":
-        obj[f.name] = 0;
-        break;
-      case "select":
-        obj[f.name] = f.options && f.options.length ? f.options[0].value : "";
-        break;
-      case "checkbox":
-        obj[f.name] = false;
-        break;
-      default:
-        obj[f.name] = "";
-    }
-  }
-  return obj;
 }

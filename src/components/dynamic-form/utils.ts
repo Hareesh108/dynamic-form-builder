@@ -28,7 +28,10 @@ function fieldToZod(field: FieldSchema) {
 
     case "select": {
       let schema = z.union([z.string(), z.number()]);
-      if (v?.required) schema = z.string().nonempty(typeof v.required === "string" ? v.required : "Required");
+      if (v?.required)
+        schema = schema.refine((val) => val !== null && val !== undefined && val !== "", {
+          message: typeof v.required === "string" ? v.required : "Required",
+        });
       return schema;
     }
 
@@ -40,8 +43,11 @@ function fieldToZod(field: FieldSchema) {
     }
 
     case "date": {
-      let schema = z.string();
-      if (v?.required) schema = schema.nonempty(typeof v.required === "string" ? v.required : "Required");
+      let schema = z.any();
+      if (v?.required)
+        schema = schema.refine((val) => val !== null && val !== undefined && val !== "", {
+          message: typeof v.required === "string" ? v.required : "Required",
+        });
       return schema;
     }
 
